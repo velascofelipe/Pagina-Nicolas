@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EBS Mantenciones</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>EBS Mantenciones</h1>
+      <nav id="nav-links">
+        <a href="#servicios">Servicios</a>
+        <a href="#nosotros">Nosotros</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <div class="hamburger" onclick="toggleMenu()">☰</div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="overlay">
+      <h2>Mantenciones preventivas y correctivas</h2>
+      <p>Climatización, electricidad, refrigeración y más</p>
+    </div>
+  </section>
+
+  <section id="servicios" class="seccion">
+    <h2>Servicios</h2>
+    <ul>
+      <li>Instalaciones de climatización</li>
+      <li>Mantenciones eléctricas</li>
+      <li>Sistemas de refrigeración</li>
+    </ul>
+  </section>
+
+  <section id="nosotros" class="seccion gris">
+    <h2>¿Quiénes somos?</h2>
+    <p>Somos una empresa chilena especializada en mantenciones correctivas y preventivas para hogares y empresas. Trabajamos con profesionalismo en todo el país.</p>
+  </section>
+
+  <section id="contacto" class="seccion">
+    <h2>Contáctanos</h2>
+    <form id="contact-form">
+      <input type="text" name="nombre" placeholder="Tu nombre" required>
+      <input type="email" name="email" placeholder="Tu correo" required>
+      <textarea name="mensaje" placeholder="Tu mensaje" required></textarea>
+      <button type="submit">Enviar</button>
+    </form>
+    
+    <script>
+    document.getElementById("contact-form").addEventListener("submit", async function (e) {
+      e.preventDefault();
+    
+      const formData = new FormData(this);
+      const data = Object.fromEntries(formData.entries());
+    
+      const response = await fetch("/api/sendEmail", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+    
+      const result = await response.json();
+      alert(result.message);
+    });
+    </script>
+    
+  </section>
+
+  <footer>
+    <p>&copy; 2025 EBS Mantenciones. Todos los derechos reservados.</p>
+  </footer>
+
+  <!-- Botón WhatsApp -->
+  <a href="https://wa.me/56912345678" class="whatsapp" target="_blank">WhatsApp</a>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
